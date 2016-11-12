@@ -1,0 +1,4 @@
+make clean
+make myspice
+myspice test19.ckt > result19	
+

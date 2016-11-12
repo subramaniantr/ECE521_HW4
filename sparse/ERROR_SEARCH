@@ -1,0 +1,207 @@
+smpl-test.c:spError err;
+smpl-test.c:        spErrorMessage( A, stderr, argv[0] );
+smpl-test.c:    if (spErrorState( A ) >= spFATAL) {
+smpl-test.c:        spErrorMessage( A, stderr, argv[0] );
+smpl-test.c:	    spErrorMessage( A, stderr, argv[0] );
+spAllocate.c: *  spErrorState
+spAllocate.c:char spcErrorsMustBeCleared[] = "Error not cleared";
+spAllocate.c:static spError ReserveElements( MatrixPtr, int );
+spAllocate.c: *  \param pError
+spAllocate.c: *      Returns error flag, needed because function \a spErrorState() will
+spAllocate.c:    spError *pError
+spAllocate.c:    *pError = spOKAY;
+spAllocate.c:    {   *pError = spNO_MEMORY;
+spAllocate.c:    Matrix->Error = *pError;
+spAllocate.c:    if (Matrix->Error == spNO_MEMORY) goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:        goto MemoryError;
+spAllocate.c:    if (Matrix->Error == spNO_MEMORY)
+spAllocate.c:        goto MemoryError;
+spAllocate.c:MemoryError:
+spAllocate.c:    *pError = spNO_MEMORY;
+spAllocate.c:        if (Matrix->Error == spNO_MEMORY) return NULL;
+spAllocate.c:    if (Matrix->Error == spNO_MEMORY) return;
+spAllocate.c:    if (Matrix->Error == spNO_MEMORY) return;
+spAllocate.c:    if (Matrix->Error == spNO_MEMORY) return;
+spAllocate.c:            if (Matrix->Error == spNO_MEMORY) return NULL;
+spAllocate.c:            if (Matrix->Error == spNO_MEMORY) return NULL;
+spAllocate.c:    {   Matrix->Error = spNO_MEMORY;
+spAllocate.c:        if (Matrix->Error == spNO_MEMORY)
+spAllocate.c:    {   Matrix->Error = spNO_MEMORY;
+spAllocate.c:spError
+spAllocate.c:spErrorState( spMatrix eMatrix )
+spAllocate.c:/* Begin `spErrorState'. */
+spAllocate.c:        return ((MatrixPtr)eMatrix)->Error;
+spAllocate.c:    if (Matrix->Error == spSINGULAR OR Matrix->Error == spZERO_DIAG)
+Binary file spAllocate.o matches
+spBuild.c:    Matrix->Error = spOKAY;
+spBuild.c: *  Error is not cleared in this routine.
+spBuild.c:    if (Matrix->Error == spNO_MEMORY) return NULL;
+spBuild.c:    if (Matrix->Error == spNO_MEMORY) return NULL;
+spBuild.c:        if (Matrix->Error == spNO_MEMORY) return;
+spBuild.c:        if (Matrix->Error == spNO_MEMORY) return;
+spBuild.c:        if (Matrix->Error == spNO_MEMORY) return;
+spBuild.c: *  Error code. Possible errors include \a spNO_MEMORY.
+spBuild.c: *  Error is not cleared in this routine.
+spBuild.c:spError
+spBuild.c: *  Error code. Possible errors include \a spNO_MEMORY.
+spBuild.c: *  Error is not cleared in this routine.
+spBuild.c:spError
+spBuild.c: *  Error code. Possible errors include \a spNO_MEMORY.
+spBuild.c: *  Error is not cleared in this routine.
+spBuild.c:spError
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:    {   Matrix->Error = spNO_MEMORY;
+spBuild.c:int J, Error, Col;
+spBuild.c:            {   Error = (*pInit)((RealNumber *)pElement, pElement->pInitInfo,
+spBuild.c:                if (Error)
+spBuild.c:                {   Matrix->Error = spMANGLED;
+spBuild.c:                    return Error;
+spBuild.c:    Matrix->Error = spOKAY;
+spDefs.h:#define  NO_ERRORS(matrix)		(((matrix)->Error >= spOKAY) AND \
+spDefs.h:				 	 ((matrix)->Error < spFATAL))
+spDefs.h:					 spcErrorsMustBeCleared )
+spDefs.h: *  Error  (int)
+spDefs.h:    int                          Error;
+spDefs.h:spcEXTERN char spcErrorsMustBeCleared[];
+spFactor.c: *  Error is cleared upon entering this function.
+spFactor.c:spError
+spFactor.c:    Matrix->Error = spOKAY;
+spFactor.c:        if (Matrix->Error >= spFATAL)
+spFactor.c:            return Matrix->Error;
+spFactor.c:        if (Matrix->Error >= spFATAL) return Matrix->Error;
+spFactor.c:    return Matrix->Error;
+spFactor.c: *  Error is cleared upon entering this function.
+spFactor.c:spError
+spFactor.c:    return (Matrix->Error = spOKAY);
+spFactor.c: *  Error is cleared in this function.
+spFactor.c:    return (Matrix->Error = spOKAY);
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:            Matrix->Error = spNO_MEMORY;
+spFactor.c:    if (Matrix->Error != spNO_MEMORY)
+spFactor.c:    {   Matrix->Error = spSINGULAR;
+spFactor.c:    Matrix->Error = spSMALL_PIVOT;
+spFactor.c:                {   Matrix->Error = spNO_MEMORY;
+spFactor.c:                {   Matrix->Error = spNO_MEMORY;
+spFactor.c:    return (Matrix->Error = spSINGULAR);
+spFactor.c:    return (Matrix->Error = spZERO_DIAG);
+Binary file spFactor.o matches
+spFortran.c: *  sfError()
+spFortran.c: *  sfErrorMessage()
+spFortran.c:#define sfError			sferror
+spFortran.c:#define sfErrorMessage		sferrormessage
+spFortran.c: *  \param Error  [INTEGER or INTEGER*2]
+spFortran.c: *	Returns error flag, needed because function spError() will not work
+spFortran.c:sfCreate( int *Size, int *Complex, int *Error )
+spFortran.c:    return (long)spCreate(*Size, *Complex, Error );
+spFortran.c: *  error occurs. Error is not cleared in this routine.
+spFortran.c: *  Error is not cleared in this routine.
+spFortran.c: *  Error code. Possible errors include \a spNO_MEMORY.
+spFortran.c: *  Error is not cleared in this routine.
+spFortran.c: *  Error code. Possible errors include \a spNO_MEMORY.
+spFortran.c: *  Error is not cleared in this routine.
+spFortran.c: *  Error is cleared in this function.
+spFortran.c: *  Error is cleared in this function.
+spFortran.c:sfErrorState( long  *Matrix )
+spFortran.c:/* Begin `sfError'. */
+spFortran.c:    return spErrorState( (spMatrix)*Matrix );
+spFortran.c:sfErrorMessage( long  *Matrix )
+spFortran.c:/* Begin `sfErrorMessage'. */
+spFortran.c:    spErrorMessage( (spMatrix)*Matrix, stderr, NULL );
+spFortran.c: *  \param pError [INTEGER or INTEGER*2]
+spFortran.c:sfCondition( long *Matrix, spREAL *NormOfMatrix, int *pError )
+spFortran.c:    return spCondition( (spMatrix)*Matrix, *NormOfMatrix, pError );
+spMatrix.h:			    * Error code that indicates that no error has
+spMatrix.h:			    * Error code that is not an error flag, but rather
+spMatrix.h:typedef int spError;
+spMatrix.h:spcEXTERN  spMatrix   spCreate( int, int, spError* );
+spMatrix.h:spcEXTERN  spError    spErrorState( spMatrix );
+spMatrix.h:    spcEXTERN void    spErrorMessage( spMatrix, FILE*, char* );
+spMatrix.h:#   define spErrorMessage(a,b,c) spcFUNC_NEEDS_FILE(_spErrorMessage,stdio)
+spMatrix.h:spcEXTERN  spError    spFactor( spMatrix );
+spMatrix.h:spcEXTERN  spError    spGetAdmittance( spMatrix, int, int,
+spMatrix.h:spcEXTERN  spError    spGetOnes( spMatrix, int, int, int,
+spMatrix.h:spcEXTERN  spError    spGetQuad( spMatrix, int, int, int, int,
+spMatrix.h:spcEXTERN  spError    spOrderAndFactor( spMatrix, spREAL[], spREAL,
+spOutput.c:    {   Matrix->Error = spNO_MEMORY;
+spRevision: *      Added spErrorMessage() error message printing function.
+spSMP.c: *  SMPgetError
+spSMP.c:    return spError( (char *)Matrix );
+spSMP.c:int Error;
+spSMP.c:    *pMatrix = (SMPmatrix *)spCreate( 0, 1, &Error );
+spSMP.c:    return Error;
+spSMP.c:    return spError( (char *)Matrix );
+spSMP.c: * SMPgetError()
+spSMP.c:SMPgetError( Matrix, Col, Row)
+spSMP.c:    return spError( (char *)Matrix );
+Binary file spSolve.o matches
+spSpice3.h: *  >>> Error descriptions:
+spSpice3.h:spcEXTERN  int      spError( char* );
+spTest.c: *  PrintMatrixErrorMessage
+spTest.c:static void PrintMatrixErrorMessage();
+spTest.c: *  Error  (int)
+spTest.c:int  Error, Last, Elements, Fillins;
+spTest.c:        Matrix = spCreate( 0, spCOMPLEX, &Error );
+spTest.c:        if( Error >= spFATAL ) goto End;
+spTest.c:        Error = ReadMatrixFromFile();
+spTest.c:        if( Error) goto End;
+spTest.c:        Error = spOrderAndFactor( Matrix, RHS, RelThreshold, AbsThreshold,
+spTest.c:        if (Error != spOKAY) spErrorMessage( Matrix, stderr, ProgramName );
+spTest.c:        if( Error >= spFATAL )
+spTest.c:            ConditionNumber = spCondition(Matrix, InfNorm, &Error);
+spTest.c:            spErrorMessage( Matrix, stderr, ProgramName );
+spTest.c:            Error = spFactor( Matrix );
+spTest.c:            if (Error != spOKAY) spErrorMessage( Matrix, stderr, ProgramName );
+spTest.c:            if (Error >= spFATAL) goto End;
+spTest.c:int Error, Row, Col, Count = 0, LineNumber, RHS_Col, IntSize;
+spTest.c:    if (Error = spErrorState( Matrix ) != spOKAY)
+spTest.c:    {   spErrorMessage( Matrix, stderr, ProgramName );
+spTest.c:        if( Error >= spFATAL ) return 1;
+Binary file spTest.o matches
+spUtils.c: *  spErrorMessage
+spUtils.c:    if (Matrix->Error == spSINGULAR)
+spUtils.c:    if (Matrix->Error == spSINGULAR OR Matrix->Error == spZERO_DIAG)
+spUtils.c: *  \param pError
+spUtils.c:    int *pError
+spUtils.c:    *pError = Matrix->Error;
+spUtils.c:    if (Matrix->Error >= spFATAL) return 0.0;
+spUtils.c:    {   *pError = spSINGULAR;
+spUtils.c:        return ComplexCondition( Matrix, NormOfMatrix, pError );
+spUtils.c:    {   *pError = spNO_MEMORY;
+spUtils.c: *  pError  <output>  (int *)
+spUtils.c:    int *pError
+spUtils.c:    {   *pError = spNO_MEMORY;
+spUtils.c:    {   if (Matrix->Error == spSINGULAR) return 0.0;
+spUtils.c:    {   if (Matrix->Error == spSINGULAR) return 0.0;
+spUtils.c:spErrorMessage(
+spUtils.c:int Row, Col, Error;
+spUtils.c:/* Begin `spErrorMessage'. */
+spUtils.c:	Error = spNO_MEMORY;
+spUtils.c:	Error = ((MatrixPtr)eMatrix)->Error;
+spUtils.c:    if (Error == spOKAY) return;
+spUtils.c:    if (Error >= spFATAL)
+spUtils.c:    if (Error == spPANIC)
+spUtils.c:    else if (Error == spNO_MEMORY)
+spUtils.c:    else if (Error == spMANGLED)
+spUtils.c:    else if (Error == spSINGULAR)
+spUtils.c:    else if (Error == spZERO_DIAG)
+spUtils.c:    else if (Error == spSMALL_PIVOT)
+spUtils.c:    ((MatrixPtr)eMatrix)->Error = spOKAY;
+Binary file spUtils.o matches
+Binary file sparse matches
+Binary file sparse.a matches
