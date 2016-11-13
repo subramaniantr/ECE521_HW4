@@ -1,4 +1,4 @@
 make clean
 make myspice
-myspice test19.ckt > result19	
+myspice test$1.ckt > result$1	
 

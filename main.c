@@ -90,6 +90,7 @@ char **av;
             printf( "\n File Name Required \n");
             exit(-1);
     }
+
     /* initialization */
     NodeArray = CALLOC(char *, MAXNODE);
     BranchArray = CALLOC(char *, MAXBRANCH);
@@ -237,11 +238,11 @@ char **av;
     setupLinCap(cktMatrix, Rhs, LinCap, numLinCap);
 
 
-h = 0.001;
+h = 1e-9;
 tstart = 0.0;
-tstop  = 1;
+tstop  = 1e-5;
 tcountmax = round((tstop-tstart)/h);
-
+printf("TCOUNT = %d",tcountmax);
   FILE *fptr;
   fptr=fopen("out.csv","a");
 
@@ -346,11 +347,11 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 ///////////////////////////////////////////END NEWTON LOOP/////////////////////////////////////////////////////////////////////////
 
 time = (tcount-1)*h;
-fprintf(fptr,"%f ",time);
+fprintf(fptr,"%9.3g ",time);
 for(i = 1; i<= numEqns; i++) {
-    fprintf(fptr,"%f ",Sol[i]);
+    fprintf(fptr,"%9.3g, ",Sol[i]);
     }
-fprintf(fptr,";\n");
+fprintf(fptr,"\n");
 
 
 } //END OF TIME
