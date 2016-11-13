@@ -16,6 +16,7 @@
 #include "mosfet.h"
 #include "bjt.h"
 #include "lincap.h"
+#include "linind.h"
 
 #include "sparse/spMatrix.h"
 
@@ -56,6 +57,7 @@ char **av;
     mosfet      *Mosfet[MAXELEM]; 
     bjt      *Bjt[MAXELEM]; 
     lincap   *LinCap[MAXELEM];
+    linind   *LinInd[MAXELEM];
     
     int i = 0;
     int j = 0;
@@ -73,6 +75,7 @@ char **av;
     int numMosfet = 0;
     int numBjt = 0;
     int numLinCap = 0;
+    int numLinInd = 0;
     int numEqns;
     char *cktMatrix;
     double *Rhs, *Sol, *Sol_old;
@@ -190,6 +193,12 @@ char **av;
 	numLinCap++;
 	    makeLinCap(LinCap, numLinCap, buf);
 	}
+	else if(tolower(buf[0]) == 'l') 
+	{
+	    /* LinInd */
+	numLinInd++;
+	    makeLinInd(LinInd, numLinInd, buf);
+	}
     }
     fclose( fpIn );
 
@@ -208,6 +217,7 @@ char **av;
     printMosfet(Mosfet, numMosfet);
     printBjt(Bjt, numBjt);
     printLinCap(LinCap, numLinCap);
+    printLinInd(LinInd, numLinInd);
 
     /* setup circuit matrix */
     numEqns = NumNodes+NumBranches;
@@ -236,11 +246,17 @@ char **av;
     setupDio(cktMatrix, Rhs, Dio, numDio);
     setupBjt(cktMatrix, Rhs, Bjt, numBjt);
     setupLinCap(cktMatrix, Rhs, LinCap, numLinCap);
+    setupLinInd(cktMatrix, Rhs, LinInd, numLinInd);
 
 
-h = 1e-9;
+
+
+
+///////////////////////DEFINING TIME STEPS AND MAX COUNTS//////////////////////////////////////////////////////
+
+h = 5e-11;
 tstart = 0.0;
-tstop  = 1e-5;
+tstop  = 1e-7;
 tcountmax = round((tstop-tstart)/h);
 printf("TCOUNT = %d",tcountmax);
   FILE *fptr;
@@ -297,6 +313,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
     loadDio(cktMatrix, Rhs, Dio, numDio,Sol, &icheck);
     loadBjt(cktMatrix, Rhs, Bjt, numBjt,Sol, &icheck);
     loadLinCap(cktMatrix, Rhs, LinCap, numLinCap,Sol,h,tcount);
+    loadLinInd(cktMatrix, Rhs, LinInd, numLinInd,Sol,h,tcount);
 
 // Assigning Current solution to the Old solution
  
@@ -308,10 +325,10 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
     spPrint(cktMatrix, 0, 1, 0);
 
     /* print Rhs vector */
-  //  printf("\nRHS\n");
-  //  for(i = 1; i <=NumNodes+NumBranches; i++) {
-  //      printf(" %9.3g\n",Rhs[i]);
-  //  }
+    printf("\nRHS\n");
+    for(i = 1; i <=NumNodes+NumBranches; i++) {
+        printf(" %9.3g\n",Rhs[i]);
+    }
     /* compute DC solution */
     /* first Factor the matrix and then Forward/Back solve */
     error = spFactor( cktMatrix );
@@ -346,10 +363,13 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 }
 ///////////////////////////////////////////END NEWTON LOOP/////////////////////////////////////////////////////////////////////////
 
-time = (tcount-1)*h;
-fprintf(fptr,"%9.3g ",time);
+
+///////////PRINT WARNING : ACCURACY OF NUMBERS WILL AFFECT THE PLOTS///////////////
+
+time = (tcount)*h;
+fprintf(fptr,"%9.9g,",time);
 for(i = 1; i<= numEqns; i++) {
-    fprintf(fptr,"%9.3g, ",Sol[i]);
+    fprintf(fptr,"%9.9g, ",Sol[i]);
     }
 fprintf(fptr,"\n");
 
