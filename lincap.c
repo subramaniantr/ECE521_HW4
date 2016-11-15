@@ -113,7 +113,7 @@ int time_step_count;
              inst->vdot = 0;
              inst->alpha = 0;
              inst->beta = 0;
-             Vc = -1.5;
+             Vc = 0;
          }
 
 ////////// SUBSEQUENT LMS ITERATION(time points)///////////////////////

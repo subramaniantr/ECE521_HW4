@@ -16,8 +16,8 @@
 #include "mosfet.h"
 #include "bjt.h"
 #include "lincap.h"
+#include "nonlincap.h"
 #include "linind.h"
-
 #include "sparse/spMatrix.h"
 
 int NumNodes = 0;
@@ -57,6 +57,7 @@ char **av;
     mosfet      *Mosfet[MAXELEM]; 
     bjt      *Bjt[MAXELEM]; 
     lincap   *LinCap[MAXELEM];
+    nonlincap   *NonLinCap[MAXELEM];
     linind   *LinInd[MAXELEM];
     
     int i = 0;
@@ -75,6 +76,7 @@ char **av;
     int numMosfet = 0;
     int numBjt = 0;
     int numLinCap = 0;
+    int numNonLinCap = 0;
     int numLinInd = 0;
     int numEqns;
     char *cktMatrix;
@@ -193,6 +195,12 @@ char **av;
 	numLinCap++;
 	    makeLinCap(LinCap, numLinCap, buf);
 	}
+	else if(tolower(buf[0]) == 'u') 
+	{
+	    /* NonLinCap */
+	numNonLinCap++;
+	    makeNonLinCap(NonLinCap, numNonLinCap, buf);
+	}
 	else if(tolower(buf[0]) == 'l') 
 	{
 	    /* LinInd */
@@ -217,6 +225,7 @@ char **av;
     printMosfet(Mosfet, numMosfet);
     printBjt(Bjt, numBjt);
     printLinCap(LinCap, numLinCap);
+    printNonLinCap(NonLinCap, numNonLinCap);
     printLinInd(LinInd, numLinInd);
 
     /* setup circuit matrix */
@@ -246,6 +255,7 @@ char **av;
     setupDio(cktMatrix, Rhs, Dio, numDio);
     setupBjt(cktMatrix, Rhs, Bjt, numBjt);
     setupLinCap(cktMatrix, Rhs, LinCap, numLinCap);
+    setupNonLinCap(cktMatrix, Rhs, NonLinCap, numNonLinCap);
     setupLinInd(cktMatrix, Rhs, LinInd, numLinInd);
 
 
@@ -257,7 +267,7 @@ char **av;
 //  scanf("%f",&h );
 //  printf("Please enter the stop time : ");
 //  scanf("%f",&tstop );
-h = 5e-11;
+h = 5e-10;
 tstart = 0.0;
 tstop  = 1e-5;
 tcountmax = round((tstop-tstart)/h);
@@ -316,6 +326,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
     loadDio(cktMatrix, Rhs, Dio, numDio,Sol, &icheck);
     loadBjt(cktMatrix, Rhs, Bjt, numBjt,Sol, &icheck);
     loadLinCap(cktMatrix, Rhs, LinCap, numLinCap,Sol,h,tcount);
+    loadNonLinCap(cktMatrix, Rhs, NonLinCap, numNonLinCap,Sol,h,tcount);
     loadLinInd(cktMatrix, Rhs, LinInd, numLinInd,Sol,h,tcount);
 
 // Assigning Current solution to the Old solution

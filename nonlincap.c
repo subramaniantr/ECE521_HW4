@@ -43,7 +43,7 @@ int numNonLinCap;
 
     for(i = 1; i <= numNonLinCap; i++) {
 	inst = NonLinCap[i];
-	printf("%s\t%s\t%s\t%s\t%f\n", inst->name, NodeArray[inst->pNode], NodeArray[inst->nNode], inst->value);
+	printf("%s\t%s\t%s\t%f\n", inst->name, NodeArray[inst->pNode], NodeArray[inst->nNode], inst->value);
     }
 }
 
@@ -87,7 +87,7 @@ int time_step_count;
 {
   int i, p, n;
   nonlincap *inst;
-  double Gk, Ik,Id;
+  double Gk, Ik;
   double VL, Vc;
   double Q, dQdV;
   double Cjo;
@@ -121,6 +121,9 @@ int time_step_count;
            if(time_step_count == 1) {
                // first time point
                inst->qdot = 0;
+             inst->alpha = 0;
+             inst->beta = 0;
+             Vc = 0.7;
            }
 
 //////////// SUBSEQUENT LMS ITERATION(time points)///////////////////////
@@ -149,9 +152,8 @@ int time_step_count;
     *(inst->pnp) -= Gk;
     *(inst->pnn) += Gk;
     
-    Rhs[p] -= Ik;
-    Rhs[n] += Ik;
-
+    Rhs[na] -= Ik;
+    Rhs[nb] += Ik;
     }
 
 }

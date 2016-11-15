@@ -156,8 +156,8 @@ int *icheck;
 
 ////////////////////Ik Calculation/////////////////////
 
-     Ick = Ic-gmcc*Xk[c]-gmce*Xk[e]-gmcb*Xk[b];
-     Iek = Ie-gmec*Xk[c]-gmee*Xk[e]-gmeb*Xk[b];
+     Ick = Ic - gmF*Vbe + Vbc*gmR/alphaR;
+     Iek = Ie - gmR*Vbc + Vbe*gmF/alphaF;
      Ibk = -(Ick+Iek);
 
     *(inst->pcc) += gmcc;
