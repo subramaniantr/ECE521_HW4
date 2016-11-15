@@ -253,10 +253,13 @@ char **av;
 
 
 ///////////////////////DEFINING TIME STEPS AND MAX COUNTS//////////////////////////////////////////////////////
-
+//  printf("Please enter the time step : ");
+//  scanf("%f",&h );
+//  printf("Please enter the stop time : ");
+//  scanf("%f",&tstop );
 h = 5e-11;
 tstart = 0.0;
-tstop  = 1e-7;
+tstop  = 1e-5;
 tcountmax = round((tstop-tstart)/h);
 printf("TCOUNT = %d",tcountmax);
   FILE *fptr;
@@ -295,7 +298,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 
  // Clearing of Rhs
  
-   for(i=1;i<=numEqns+1;i++)
+   for(i=1;i<=numEqns;i++)
         Rhs[i]=0;
     
     /* load circuit matrix */
@@ -348,7 +351,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 
    
    
-   for(i=1;i<=numEqns+1;i++)
+   for(i=1;i<=numEqns;i++)
       {
         norm_Sol_old +=  fabs(Sol_old[i]);
         norm_Sol     +=  fabs(Sol[i]);

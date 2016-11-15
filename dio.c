@@ -90,6 +90,10 @@ int *icheck;
   double Is, Vt,area;
 
 
+////////Hard coding Is, Vt and Vcrit Values////////////////////////////////////
+      Is = 1.0e-16;
+      Vt = 0.0258;
+      Vcrit = Vt*log(Vt/(Is*sqrt(2)));
 
   for(i = 1; i <= numDio; i++) {
     inst = Dio[i];
@@ -98,16 +102,12 @@ int *icheck;
 ///////////Getting Vd from Vp and Vn////////////////////////////////////
     Vd = Xk[p]-Xk[n];
     area = inst->area;
-////////Hard coding Is and Vt Values////////////////////////////////////
-      Is = 1.0e-16;
-      Vt = 0.0258;
 /////////////APPLYING ONE TIME INITIAL CONDITION FOR CONVERGENCE////////
    if(iter_counter == 0){
       Vd = 0.5;
       inst->Vd_old = 0.8;
     }
 //////////////////////////////////APPLYING LIMITING///////////////////////
-     Vcrit = Vt*log(Vt/(Is*sqrt(2)));
      Vd= pnjlim(Vd,inst->Vd_old,Vt,Vcrit, icheck);
 
 ///////////////////////////////ASSIGNING V_OLD///////////////////////////////////

@@ -117,7 +117,7 @@ int time_step_count;
          }
 
 ////////// SUBSEQUENT LMS ITERATION(time points)///////////////////////
-//////// USE THE OLD ALPHA BETA AND NEW V TO GET NEW V'////////////////
+//////// USE THE OLD ALPHA BETA AND NEW I TO GET NEW I'////////////////
          else {
 
              inst->idot = (inst->alpha)*Ib+(inst->beta);
