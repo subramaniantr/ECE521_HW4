@@ -95,12 +95,13 @@ int numMosfet;
 
 
 
-void loadMosfet(Matrix, Rhs, Mosfet, numMosfet, Xk)
+void loadMosfet(Matrix, Rhs, Mosfet, numMosfet, Xk, time_step_count)
 char *Matrix;
 double *Rhs;
 mosfet *Mosfet[];
 int numMosfet;
 double* Xk;
+int time_step_count;
 {
   int i, g, d, s, b;
   mosfet *inst;
@@ -155,7 +156,8 @@ double* Xk;
     norm = 1.0;
     rev = 0.0;
 /////////////APPLYING ONE TIME INITIAL CONDITION FOR CONVERGENCE/////////////////
-   if(iter_counter == 0)
+   if(iter_counter == 0 )
+      if(time_step_count == 1)
     {
       Vgs = 1.1;
       Vds = 1.1;

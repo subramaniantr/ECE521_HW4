@@ -81,19 +81,20 @@ int numBjt;
     }
 }
 
-void loadBjt(Matrix, Rhs, Bjt, numBjt, Xk,icheck)
+void loadBjt(Matrix, Rhs, Bjt, numBjt, Xk,icheck, time_step_count)
 char *Matrix;
 double *Rhs;
 bjt *Bjt[];
 int numBjt;
 double* Xk;
 int *icheck;
+int time_step_count;
 {
   int i, c, b, e;
   bjt *inst;
   double Ic, Ib, Ie;
   double Ick, Ibk, Iek;
-  double Vce, Vbe, Vbc,Vcrit;
+  double  Vbe, Vbc,Vcrit;
   double gmF, gmR;
   double gmcc, gmcb, gmce;
   double gmbc, gmbb, gmbe;
@@ -107,21 +108,20 @@ int *icheck;
     b = inst->bNode;
     e = inst->eNode;
 
-///////////Getting Vbe, Vce from Vb, Ve and Vc///////////////
+///////////Getting Vbe from Vb, Ve and Vc///////////////
     Vbe = Xk[b]-Xk[e];
     Vbc = Xk[b]-Xk[c];
-    Vce = Xk[c]-Xk[e];
 ////////Hard coding Is, Vt, alphaF and alphaR Values//////////////////
       Is = 1.0e-16;
       Vt = 0.0258;
       alphaF=0.99;
       alphaR=0.01;
 /////////////APPLYING ONE TIME INITIAL CONDITION FOR CONVERGENCE//////////////////////
-   if(iter_counter == 0){
-      Vbe = 0.7;
-      Vce = 0.2;
+      if(time_step_count == 1 && iter_counter==0)
+   {
+      Vbe = 0.2;
       Vbc = 1.0;
-}
+   }
 
 ////////////////////////////////APPLYING LIMITING////////////////////////////////
    Vcrit = Vt*log(Vt/(Is*sqrt(2)));

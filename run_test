@@ -1,3 +1,4 @@
+clear
 make clean
 make myspice
 myspice test$1.ckt 	
