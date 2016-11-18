@@ -1,4 +1,3 @@
-
 #include "macros.h"
 #include "math.h"
 #include "sparse/spMatrix.h"
@@ -48,8 +47,6 @@ int numLinInd;
 	printf("%s\t%s\t%s\t%f\n", inst->name, NodeArray[inst->pNode], NodeArray[inst->nNode], inst->value);
     }
 }
-
-
 
 
 void setupLinInd(Matrix, Rhs, LinInd, numLinInd)
@@ -132,11 +129,9 @@ int time_step_count;
 ///////////////////////////Rk = C*ALPHA/////////////////////////////////
 
       Rk = (inst->alpha)*Indval;
-printf("Rk = %f",Rk);
 ///////////////////////////Vk calculation///////////////////////////////
 
       Vk = (inst->beta)*Indval;
-printf("Vk = %f",Vk);
 
 ////////// stamp matrix
       *(inst->ppb) += 1; 

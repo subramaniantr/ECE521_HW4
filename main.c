@@ -85,7 +85,7 @@ char **av;
     int error, icheck;
     double norm_dx, norm_Sol_old, norm_Sol, Ea, Er;
     double time, tstart, tstop, h;
-    int tcount, tcountmax;
+    int tcount, tcountmax,conv_flag;
     int Fillins;
     switch (ac) {
         case 2:
@@ -292,8 +292,9 @@ for(tcount=1;tcount<tcountmax;tcount++)
    Er = 1e-3;
    iter_counter = 0;
    icheck = 0;
+   conv_flag =0;  
 
-while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
+while(conv_flag==0 || icheck==1){
 
 
 //Clearing the norm values
@@ -323,7 +324,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
     loadGyro(cktMatrix, Rhs, Gyro, numGyro);
     loadOp(cktMatrix, Rhs, Op, numOp);
     loadMosfet(cktMatrix, Rhs, Mosfet, numMosfet,Sol,tcount);
-    loadDio(cktMatrix, Rhs, Dio, numDio,Sol, &icheck);
+    loadDio(cktMatrix, Rhs, Dio, numDio,Sol, &icheck,tcount);
     loadBjt(cktMatrix, Rhs, Bjt, numBjt,Sol, &icheck,tcount);
     loadLinCap(cktMatrix, Rhs, LinCap, numLinCap,Sol,h,tcount);
     loadNonLinCap(cktMatrix, Rhs, NonLinCap, numNonLinCap,Sol,h,tcount);
@@ -331,7 +332,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 
 // Assigning Current solution to the Old solution
  
-   for(i=1;i<=numEqns+1;i++)
+   for(i=1;i<=numEqns;i++)
         Sol_old[i]=Sol[i];
  
     /* print circuit matrix */
@@ -340,7 +341,7 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 
     /* print Rhs vector */
     printf("\nRHS\n");
-    for(i = 1; i <=NumNodes+NumBranches; i++) {
+    for(i = 1; i <=numEqns; i++) {
         printf(" %9.3g\n",Rhs[i]);
     }
     /* compute DC solution */
@@ -360,14 +361,20 @@ while(norm_dx > Ea+Er*maximum(norm_Sol_old,norm_Sol || icheck==1)){
 
 //Calculating Norms of Old, Current and Delta Solutions
 
-   
-   
+
    for(i=1;i<=numEqns;i++)
       {
-        norm_Sol_old +=  fabs(Sol_old[i]);
-        norm_Sol     +=  fabs(Sol[i]);
-        norm_dx      +=  fabs(Sol_old[i]-Sol[i]);
+        norm_Sol_old =  fabs(Sol_old[i]);
+        norm_Sol     =  fabs(Sol[i]);
+        norm_dx      =  fabs(Sol_old[i]-Sol[i]);
+
+     if(norm_dx < Ea+Er*maximum(norm_Sol_old,norm_Sol))
+      conv_flag = 1;
+    else
+      conv_flag = 0;
       }
+   
+   
 
 // Break if iter_counter exceeds 100
 
@@ -392,11 +399,5 @@ fprintf(fptr,"\n");
 
 printf(" Total Number of Iterations= %3d, \n", iter_counter);
 fclose(fptr);
-
-//    /* print solution */
-//    printf("Solution\n");
-//    for(i = 1; i<= numEqns; i++) {
-//	printf("X[%d] = %g\n", i, Sol[i]);
-//    }
 
 }

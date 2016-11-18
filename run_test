@@ -1,5 +1,17 @@
 clear
 make clean
 make myspice
-myspice test$1.ckt 	
-
+clear
+myspice test19.ckt > junk
+mv out.csv out19.csv 	
+myspice test20.ckt > junk
+mv out.csv out20.csv 	
+myspice test21.ckt > junk
+mv out.csv out21.csv 	
+myspice test22.ckt > junk
+mv out.csv out22.csv 	
+myspice test23.ckt > junk
+mv out.csv out23.csv	
+myspice test24.ckt > junk
+mv out.csv out24.csv 	
+rm -rf junk

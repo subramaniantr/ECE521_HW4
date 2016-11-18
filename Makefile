@@ -8,4 +8,4 @@ COBJ=	main.o utils.o res.o isrc.o vsrc.o vcvs.o vccs.o ccvs.o cccs.o tf.o gyro.o
 myspice: ${COBJ} 
 	${CC} ${CFLAGS} -o myspice ${COBJ} sparse/sparse.a -lm
 clean:
-	rm myspice ${COBJ} result* out.csv
+	rm myspice ${COBJ} result* *.o *.csv

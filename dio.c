@@ -76,13 +76,14 @@ int numDio;
     }
 }
 
-void loadDio(Matrix, Rhs, Dio, numDio, Xk,icheck)
+void loadDio(Matrix, Rhs, Dio, numDio, Xk,icheck,time_step_count)
 char *Matrix;
 double *Rhs;
 diode *Dio[];
 int numDio;
 double* Xk;
 int *icheck;
+int time_step_count;
 {
   int i, p, n;
   diode *inst;
@@ -103,7 +104,7 @@ int *icheck;
     Vd = Xk[p]-Xk[n];
     area = inst->area;
 /////////////APPLYING ONE TIME INITIAL CONDITION FOR CONVERGENCE////////
-   if(iter_counter == 0){
+   if(time_step_count == 1 && iter_counter == 0){
       Vd = 0.5;
       inst->Vd_old = 0.8;
     }
