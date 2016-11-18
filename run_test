@@ -14,4 +14,6 @@ myspice test23.ckt > junk
 mv out.csv out23.csv	
 myspice test24.ckt > junk
 mv out.csv out24.csv 	
+myspice test25.ckt > junk
+mv out.csv out25.csv 	
 rm -rf junk

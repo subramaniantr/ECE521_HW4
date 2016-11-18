@@ -29,3 +29,7 @@ subplot(3,2,6)
 a = csvread('out24.csv');
 plot(a(:,1),a(:,3))
 title('Plot24');
+
+a = csvread('out25.csv');
+plot(a(:,1),a(:,3))
+title('Plot25');

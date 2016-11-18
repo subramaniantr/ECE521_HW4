@@ -114,6 +114,14 @@ int time_step_count;
              inst->alpha = 0;
              inst->beta = 0;
              Vc = 0;
+     /*    
+         if(i ==3)   //RING OSCILLATOR
+             Vc=1; 
+         if(i ==2)   //MOS COLPITT'S OSCILLATOR
+             Vc=-1.5; 
+         if(i ==2)   //BJT COLPITT'S OSCILLATOR
+             Vc=-0.5; 
+     */
          }
 
 ////////// SUBSEQUENT LMS ITERATION(time points)///////////////////////
