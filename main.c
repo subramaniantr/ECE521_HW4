@@ -85,7 +85,7 @@ char **av;
     int error, icheck;
     double norm_dx, norm_Sol_old, norm_Sol, Ea, Er;
     double time, tstart, tstop, h;
-    int tcount, tcountmax,conv_flag;
+    int tcount, tcountmax,conv_counter,conv_flag;
     int Fillins;
     switch (ac) {
         case 2:
@@ -361,7 +361,7 @@ while(conv_flag==0 || icheck==1){
 
 //Calculating Norms of Old, Current and Delta Solutions
 
-
+   conv_counter = 0;
    for(i=1;i<=numEqns;i++)
       {
         norm_Sol_old =  fabs(Sol_old[i]);
@@ -369,11 +369,13 @@ while(conv_flag==0 || icheck==1){
         norm_dx      =  fabs(Sol_old[i]-Sol[i]);
 
      if(norm_dx < Ea+Er*maximum(norm_Sol_old,norm_Sol))
-      conv_flag = 1;
-    else
-      conv_flag = 0;
-      }
+      conv_counter++;
+          }
    
+     if(conv_counter == numEqns)
+       conv_flag = 1;
+     else
+       conv_flag = 0;
    
 
 // Break if iter_counter exceeds 100
